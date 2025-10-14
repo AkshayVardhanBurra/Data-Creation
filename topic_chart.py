@@ -3,7 +3,7 @@ import seaborn as sns
 import pandas
 
 
-
+# Add more dataframes from other companies to this section.
 dataframes = [pandas.read_csv("amazon.csv"), pandas.read_csv("microsoft.csv")]
 questions = pandas.concat(dataframes)
 
@@ -91,11 +91,19 @@ def displayPiChart(questionCount:dict):
     labels = []
     data = []
     updateLabelsAndData(labels, data, questionCount)
+
+    dataDf  = {
+        "Concept": labels,
+        "Frequency": data
+    }
+
+    dataDf = pandas.DataFrame(dataDf)
+    dataDf = dataDf.sort_values(by="Frequency", ascending=False)
     sns.set_style("darkgrid")
-    plt.pie(data, labels=labels)
+    plt.pie(dataDf["Frequency"].to_list(), labels=dataDf["Concept"].to_list())
 
     # Add title
-    plt.title("Distribution of Leet Code Questions by Concept At Amazon")
+    plt.title("Distribution of Leet Code Questions by Concept At Top Companies")
 
     # Show plot
     plt.show()
