@@ -99,16 +99,17 @@ def displayPiChart(questionCount:dict):
 
     dataDf = pandas.DataFrame(dataDf)
     dataDf = dataDf.sort_values(by="Frequency", ascending=False)
+    dataDf.to_csv("piechart.csv")
     sns.set_style("darkgrid")
     plt.pie(dataDf["Frequency"].to_list(), labels=dataDf["Concept"].to_list())
 
     # Add title
-    plt.title("Distribution of Leet Code Questions by Concept At Top Companies")
+    plt.title("Fig. 1 Distribution of Leet Code Questions by Concept At Top Companies [5]")
 
     # Show plot
     plt.show()
 
-merged = merge(questionCount, 15)
+merged = merge(questionCount, 8)
 print("number of concepts: " + str(len(questionCount)))
 print("\n")
 print(merged)
